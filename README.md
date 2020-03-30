@@ -22,7 +22,7 @@ repositories {
 - Add the dependency
 ```
 implementation 'com.github.DaikonWeb:topinambur:1.2.4'
-implementation 'com.github.DaikonWeb:topinambur-async:1.2.4'
+implementation 'com.github.DaikonWeb:topinambur-async:0.0.1'
 ```
 
 ### Maven
@@ -45,16 +45,29 @@ implementation 'com.github.DaikonWeb:topinambur-async:1.2.4'
 <dependency>
     <groupId>com.github.DaikonWeb</groupId>
     <artifactId>topinambur-async</artifactId>
-    <version>1.2.4</version>
+    <version>0.0.1</version>
 </dependency>
 ```
 
 ## Getting Started
+
+#### Async - Await way
+
 ```
 runBlocking {
     val response = "https://github.com/DaikonWeb".httpAsync(this).get()
 
     println(response.await().statusCode)
+}
+```
+
+#### Launch way
+
+```
+runBlocking {
+    "https://github.com/DaikonWeb".httpAsync(this).get() { response ->
+        println(response.statusCode)
+    }
 }
 ```
 
