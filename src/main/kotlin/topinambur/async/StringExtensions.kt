@@ -6,4 +6,4 @@ import java.io.PrintStream
 
 
 fun String.httpAsync(scope: CoroutineScope = GlobalScope, printer: PrintStream? = null) =
-    HttpAsyncClient(scope, this, printer)
+    HttpAsync(scope, this, printer)

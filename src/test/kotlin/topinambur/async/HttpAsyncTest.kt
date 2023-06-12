@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 
-class HttpAsyncClientTest {
+class HttpAsyncTest {
 
     @Test
     fun `Deferred request`() {
@@ -23,7 +23,7 @@ class HttpAsyncClientTest {
                     assertThat(http.head().await().statusCode).isEqualTo(OK_200)
                     assertThat(http.options().await().statusCode).isEqualTo(OK_200)
                     assertThat(http.put().await().statusCode).isEqualTo(OK_200)
-                    assertThat(http.call("GET").await().statusCode).isEqualTo(OK_200)
+                    assertThat(http.call(method = "GET").await().statusCode).isEqualTo(OK_200)
                 }
             }
     }
@@ -41,7 +41,7 @@ class HttpAsyncClientTest {
                     http.head { assertThat(it.statusCode).isEqualTo(OK_200) }
                     http.options { assertThat(it.statusCode).isEqualTo(OK_200) }
                     http.put { assertThat(it.statusCode).isEqualTo(OK_200) }
-                    http.call("GET") { assertThat(it.statusCode).isEqualTo(OK_200) }
+                    http.call(method = "GET") { assertThat(it.statusCode).isEqualTo(OK_200) }
                 }
             }
     }
