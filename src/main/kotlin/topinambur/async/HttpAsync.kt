@@ -7,7 +7,7 @@ import topinambur.None
 import topinambur.ServerResponse
 import java.io.PrintStream
 
-class HttpAsync(private val scope: CoroutineScope = GlobalScope, url: String, log: PrintStream? = null) {
+class HttpAsync(private val scope: CoroutineScope, url: String = "", log: PrintStream? = null) {
     private val client = Http(url, log)
 
     suspend fun get(url: String = "", params: Map<String, String> = emptyMap(), headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000)
@@ -28,23 +28,23 @@ class HttpAsync(private val scope: CoroutineScope = GlobalScope, url: String, lo
     fun options(url: String = "", params: Map<String, String> = emptyMap(), headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000, callback: (ServerResponse) -> Unit)
             = launch { callback(client.options(url, params, headers, auth, followRedirects, timeoutMillis)) }
 
-    suspend fun post(url: String = "", body: String = "", data: Map<String, String> = emptyMap(), headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000)
-            = async { client.post(url, body, data, headers, auth, followRedirects, timeoutMillis) }
+    suspend fun post(url: String = "", body: String = "", headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000)
+            = async { client.post(url, body, headers, auth, followRedirects, timeoutMillis) }
 
-    fun post(url: String = "", body: String = "", data: Map<String, String> = emptyMap(), headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000, callback: (ServerResponse) -> Unit)
-            = launch { callback(client.post(url, body, data, headers, auth, followRedirects, timeoutMillis)) }
+    fun post(url: String = "", body: String = "", headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000, callback: (ServerResponse) -> Unit)
+            = launch { callback(client.post(url, body, headers, auth, followRedirects, timeoutMillis)) }
 
     suspend fun put(url: String = "", body: String = "", data: Map<String, String> = emptyMap(), headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000)
-            = async { client.put(url, body, data, headers, auth, followRedirects, timeoutMillis) }
+            = async { client.put(url, body, headers, auth, followRedirects, timeoutMillis) }
 
-    fun put(url: String = "", body: String = "", data: Map<String, String> = emptyMap(), headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000, callback: (ServerResponse) -> Unit)
-            = launch { callback(client.put(url, body, data, headers, auth, followRedirects, timeoutMillis)) }
+    fun put(url: String = "", body: String = "", headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000, callback: (ServerResponse) -> Unit)
+            = launch { callback(client.put(url, body, headers, auth, followRedirects, timeoutMillis)) }
 
-    suspend fun delete(url: String = "", body: String = "", data: Map<String, String> = emptyMap(), headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000)
-            = async { client.delete(url, body, data, headers, auth, followRedirects, timeoutMillis) }
+    suspend fun delete(url: String = "", body: String = "", headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000)
+            = async { client.delete(url, body, headers, auth, followRedirects, timeoutMillis) }
 
-    fun delete(url: String = "", body: String = "", data: Map<String, String> = emptyMap(), headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000, callback: (ServerResponse) -> Unit)
-            = launch { callback(client.delete(url, body, data, headers, auth, followRedirects, timeoutMillis)) }
+    fun delete(url: String = "", body: String = "", headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000, callback: (ServerResponse) -> Unit)
+            = launch { callback(client.delete(url, body, headers, auth, followRedirects, timeoutMillis)) }
 
     suspend fun call(url: String = "", method: String = "GET", params: Map<String, String> = emptyMap(), data: String = "", headers: Map<String, String> = emptyMap(), auth: AuthorizationStrategy = None(), followRedirects: Boolean = true, timeoutMillis: Int = 30000)
             = async { client.call(url, method, params, data.toByteArray(), headers, auth, followRedirects, timeoutMillis) }

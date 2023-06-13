@@ -15,7 +15,7 @@ class HttpAsyncTest {
             .any("/") { _, res -> res.status(OK_200) }
             .start().use {
                 runBlocking {
-                    val http = local("/").httpAsync(this)
+                    val http = HttpAsync(this, local("/"))
 
                     assertThat(http.get().await().statusCode).isEqualTo(OK_200)
                     assertThat(http.post().await().statusCode).isEqualTo(OK_200)
@@ -34,7 +34,7 @@ class HttpAsyncTest {
             .any("/") { _, res -> res.status(OK_200) }
             .start().use {
                 runBlocking {
-                    val http = local("/").httpAsync(this)
+                    val http = HttpAsync(this, local("/"))
                     http.get { assertThat(it.statusCode).isEqualTo(OK_200) }
                     http.post { assertThat(it.statusCode).isEqualTo(OK_200) }
                     http.delete { assertThat(it.statusCode).isEqualTo(OK_200) }

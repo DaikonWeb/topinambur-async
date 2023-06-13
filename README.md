@@ -22,7 +22,7 @@ repositories {
 - Add the dependency
 ```
 implementation 'com.github.DaikonWeb:topinambur:1.2.4'
-implementation 'com.github.DaikonWeb:topinambur-async:1.5.0'
+implementation 'com.github.DaikonWeb:topinambur-async:1.7.0'
 ```
 
 ### Maven
@@ -40,12 +40,12 @@ implementation 'com.github.DaikonWeb:topinambur-async:1.5.0'
 <dependency>
     <groupId>com.github.DaikonWeb</groupId>
     <artifactId>topinambur</artifactId>
-    <version>1.5.0</version>
+    <version>1.7.0</version>
 </dependency>
 <dependency>
     <groupId>com.github.DaikonWeb</groupId>
     <artifactId>topinambur-async</artifactId>
-    <version>1.5.0</version>
+    <version>1.7.0</version>
 </dependency>
 ```
 
